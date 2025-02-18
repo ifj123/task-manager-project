@@ -1,11 +1,72 @@
 {% extends "base.html" %}
+
 {% block title %}Register{% endblock %}
 
 {% block content %}
-  <h2>Register</h2>
-  <form method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">Register</button>
-  </form>
+  <div class="register-container">
+      <h2 class="register-title">Register</h2>
+      <form method="post" class="register-form">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="register-btn">Register</button>
+      </form>
+  </div>
+{% endblock %}
+
+{% block styles %}
+  <style>
+      .register-container {
+          width: 100%;
+          max-width: 400px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #f9f9f9;
+          border-radius: 8px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      
+      .register-title {
+          text-align: center;
+          font-size: 24px;
+          color: #333;
+          margin-bottom: 20px;
+      }
+      
+      .register-form {
+          display: flex;
+          flex-direction: column;
+      }
+
+      .register-form p {
+          margin-bottom: 15px;
+      }
+
+      .register-btn {
+          padding: 12px;
+          background-color: #4CAF50;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          font-size: 16px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+      }
+
+      .register-btn:hover {
+          background-color: #45a049;
+      }
+
+      .register-form input, .register-form select {
+          padding: 10px;
+          margin: 8px 0;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          font-size: 16px;
+      }
+
+      .register-form input:focus, .register-form select:focus {
+          outline: none;
+          border-color: #4CAF50;
+      }
+  </style>
 {% endblock %}

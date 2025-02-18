@@ -1,17 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .auth-links {
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .auth-links a,
+        .auth-links button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            text-decoration: none;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .auth-links button:hover,
+        .auth-links a:hover {
+            background-color: #45a049;
+        }
+
+        .auth-links form {
+            display: inline-block;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
-    {% if user.is_authenticated %}
-    <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: inline;">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-      </form>
-    {% else %}
-        <p><a href="{% url 'login' %}">Login</a></p>
-    {% endif %}
-    {% block content %}{% endblock %}
+    <header>
+        <h1>Task Manager</h1>
+    </header>
+
+    <div class="auth-links">
+        {% if user.is_authenticated %}
+            <form id="logout-form" action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        {% else %}
+            <p><a href="{% url 'login' %}">Login</a></p>
+        {% endif %}
+    </div>
+
+    <main>
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
 </body>
 </html>
